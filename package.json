@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "admin-on-rest": "^1.4.0",
+    "aor-embedded-array": "0.0.8",
+    "aor-firebase-client": "0.0.10",
     "firebase": "^4.11.0",
     "history": "^4.7.2",
     "react": "^16.2.0",
