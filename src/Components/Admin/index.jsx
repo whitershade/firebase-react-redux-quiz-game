@@ -1,6 +1,7 @@
 import React from 'react';
 import { Admin, Resource, Delete } from 'admin-on-rest'
-import { PostList, PostEdit, PostCreate } from './Posts';
+import { QuestionList, QuestionEdit, QuestionCreate } from './Questions';
+import { AnswerList, AnswerEdit, AnswerCreate } from './Answers';
 import {RestClient, AuthClient} from 'aor-firebase-client';
 
 
@@ -14,11 +15,12 @@ const config = {
 };
 
 
-const trackedResources = ['questions']
+const trackedResources = ['questions', 'answers']
 
 const App = () => (
     <Admin restClient={RestClient(trackedResources, config)} authClient={AuthClient}>
-       <Resource name="questions" list={PostList} edit={PostEdit} create={PostCreate} remove={Delete} />
+       <Resource name="questions" list={QuestionList} edit={QuestionEdit} create={QuestionCreate} remove={Delete} />
+       <Resource name="answers" list={AnswerList} edit={AnswerEdit} remove={Delete} />
     </Admin>
 );
 

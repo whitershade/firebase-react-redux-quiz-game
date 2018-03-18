@@ -2,7 +2,7 @@ import React from 'react';
 import { EmbeddedArrayInput } from 'aor-embedded-array';
 import { SingleFieldList, ChipField, ReferenceArrayField, Filter, List, Edit, Create, Datagrid, ReferenceField, TextField, EditButton, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput } from 'admin-on-rest';
 
-const PostFilter = (props) => (
+const QuestionFilter = (props) => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
         <ReferenceInput label="User" source="userId" reference="profiles" allowEmpty>
@@ -11,8 +11,8 @@ const PostFilter = (props) => (
     </Filter>
 );
 
-export const PostList = (props) => (
-    <List {...props} filters={<PostFilter />}>
+export const QuestionList = (props) => (
+    <List {...props} filters={<QuestionFilter />}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="attributes.question" />
@@ -21,12 +21,12 @@ export const PostList = (props) => (
     </List>
 );
 
-const PostTitle = ({ record }) => {
+const QuestionTitle = ({ record }) => {
     return <span>New question</span>;
 };
 
-export const PostEdit = (props) => (
-    <Edit title={<PostTitle />} {...props}>
+export const QuestionEdit = (props) => (
+    <Edit title={<QuestionTitle />} {...props}>
         <SimpleForm>
             <DisabledInput source="id" />
             <TextInput source="attributes.question" label="Question" />
@@ -40,7 +40,7 @@ export const PostEdit = (props) => (
     </Edit>
 );
 
-export const PostCreate = (props) => (
+export const QuestionCreate = (props) => (
     <Create {...props}>
         <SimpleForm redirect="list">
           <LongTextInput source="attributes.question" label="Question" />
