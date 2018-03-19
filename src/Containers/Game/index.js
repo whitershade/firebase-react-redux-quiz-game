@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import Component from '../../Components/Pages/Questions';
+import Component from '../../Components/Game';
 import { loadItems } from '../../Actions/Questions';
-import Selector from '../../Selectors/Pages/Questions';
 
 
 const mapDispatchToProps = dispatch => ({
@@ -9,4 +8,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(Selector, mapDispatchToProps)(Component);
+export default connect(null, mapDispatchToProps)(Component);

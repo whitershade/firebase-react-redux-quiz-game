@@ -5,7 +5,7 @@ import { createItem } from '../../Actions/Answers';
 
 
 const Form = reduxForm({
-  form: 'wizard', // <------ same form name
+  form: 'answers', // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
 })(Component);

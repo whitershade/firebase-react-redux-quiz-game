@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import WizardFormFirstPage from '../../Containers/Game/WizardFormFirstPage'
 import WizardFormSecondPage from '../../Containers/Game/WizardFormSecondPage'
 
+
 class WizardForm extends Component {
+  componentDidMount() {
+    this.props.loadItems();
+  }
+
   state = { page: 1 }
 
   nextPage = () => this.setState({ page: this.state.page + 1 })
@@ -25,5 +30,6 @@ class WizardForm extends Component {
 WizardForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
+
 
 export default WizardForm;
