@@ -7,6 +7,7 @@ import WizardFormSecondPage from '../../Containers/Game/WizardFormSecondPage'
 class WizardForm extends Component {
   componentDidMount() {
     this.props.loadItems();
+    this.props.setInitialNumberOfCorrectAnswers();
   }
 
   state = { page: 1 }
