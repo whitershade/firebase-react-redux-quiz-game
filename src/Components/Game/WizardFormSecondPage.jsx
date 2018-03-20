@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { isEmpty } from 'lodash';
 import { Field } from 'redux-form'
 import Input from '../Forms/Fields/Input';
+import './styles.css';
 
 class WizardFormSecondPage extends Component {
   render() {
-    const { handleSubmit, question, indexOfCurrentQuestion, chooseAnswer } = this.props;
+    const { handleSubmit, question, indexOfCurrentQuestion, chooseAnswer, isShowCorrectAnswer, answers } = this.props;
 
     if(isEmpty(question)) return null;
 
@@ -16,28 +17,19 @@ class WizardFormSecondPage extends Component {
             { question.attributes.question }
           </div>
 
-          { question.attributes.correctAnswers.map((answer, index)  => (
-            <label key={answer}>
-              <Field
-                name={`answers[${indexOfCurrentQuestion}].answer`} component={Input} type="radio" value={answer} onChange={chooseAnswer(indexOfCurrentQuestion, question.attributes.question, true)}/>
-              { answer }
-            </label>)
-          ) }
-          { question.attributes.incorrectAnswers.map((answer, index) => (
-            <label key={index}>
+          { answers.map(({ answer, isCorrect }) => (
+            <label key={answer} className={ isShowCorrectAnswer ? isCorrect ? 'green' : 'red' : '' }>
               <Field
                 name={`answers[${indexOfCurrentQuestion}].answer`}
                 component={Input}
                 type="radio"
                 value={answer}
-                onChange={chooseAnswer(indexOfCurrentQuestion, question.attributes.question, false)}/>
+                onChange={chooseAnswer(indexOfCurrentQuestion, question.attributes.question, isCorrect)}
+              />
               { answer }
             </label>)
           ) }
-          <br />
-          <button type="submit">
-             Submit
-          </button>
+
         </form>
       )
     )

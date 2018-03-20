@@ -2,6 +2,14 @@ import database from './Firebase';
 import { change, submit } from 'redux-form';
 import { getNextQuestion } from './Questions';
 
+const showCorrectAnswer = () => ({
+  type: '@ANSWERS/SHOW_CORRECT_ANSWER'
+})
+
+const hideCorrectAnswer = () => ({
+  type: '@ANSWERS/HIDE_CORRECT_ANSWER'
+})
+
 export const createItem = attributes => dispatch => {
   database
     .ref('/answers')
@@ -20,18 +28,20 @@ const handleNumberOfCorrectAnswers = (correct) => (dispatch, getState) => {
 }
 
 export const chooseAnswer = (indexOfCurrentQuestion, question, correct) => (dispatch, getState) => {
-  const { questions: { data: questions }, form: { answers: { values: { numberOfCorrectAnwsers  } } } } = getState();
+  const { questions: { data: questions } } = getState();
 
-  Promise.all([
-      dispatch(change('answers', `answers[${indexOfCurrentQuestion}].isCorrect`, correct)),
-      dispatch(change('answers', `answers[${indexOfCurrentQuestion}].question`, question)),
-      dispatch(handleNumberOfCorrectAnswers(correct))
-    ])
-    .then(() => {
-      if ((questions.length - 1) > indexOfCurrentQuestion) {
-        dispatch(getNextQuestion());
-      } else {
-        dispatch(submit('answers'));
-      }
-    });
+  dispatch(change('answers', `answers[${indexOfCurrentQuestion}].isCorrect`, correct));
+  dispatch(change('answers', `answers[${indexOfCurrentQuestion}].question`, question));
+  dispatch(handleNumberOfCorrectAnswers(correct));
+
+  dispatch(showCorrectAnswer());
+  setTimeout(() => {
+    dispatch(hideCorrectAnswer());
+
+    if ((questions.length - 1) > indexOfCurrentQuestion) {
+      dispatch(getNextQuestion());
+    } else {
+      dispatch(submit('answers'));
+    }
+  }, 1000);
 }
